@@ -34,7 +34,7 @@
 				 		<?php echo $i++ ?>
 				 	</td>
 				 	<td>
-				 		<?php echo $row['name'] ?>
+				 		<?php echo ucwords($row['name'] )?>
 				 	</td>
 				 	<td>
 				 		<?php echo $row['username'] ?>
