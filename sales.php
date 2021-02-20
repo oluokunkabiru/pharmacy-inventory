@@ -35,7 +35,7 @@
 									<td class="text-center"><?php echo $i++ ?></td>
 									<td class=""><?php echo date("M d, Y",strtotime($row['date_updated'])) ?></td>
 									<td class=""><?php echo $row['ref_no'] ?></td>
-									<td class=""><?php echo isset($cus_arr[$row['customer_id']])? $cus_arr[$row['customer_id']] :'N/A' ?></td>
+									<td class=""><?php echo isset($cus_arr[$row['customer_id']])? ucwords($cus_arr[$row['customer_id']]) :'N/A' ?></td>
 									<td class="text-center">
 										<a class="btn btn-sm btn-primary" href="index.php?page=pos&id=<?php echo $row['id'] ?>">Edit</a>
 										<a class="btn btn-sm btn-danger delete_sales" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
