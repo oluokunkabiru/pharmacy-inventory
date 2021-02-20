@@ -34,10 +34,11 @@
 							
 					<div class="card-footer">
 						<div class="row">
-							<div class="col-md-12">
-								<button class="btn btn-sm btn-primary col-sm-3 offset-md-3"> Save</button>
-								<button class="btn btn-sm btn-default col-sm-3" type="button" onclick="$('#manage-supplier').get(0).reset()"> Cancel</button>
-							</div>
+							<!-- <div class="col-md-6"> -->
+								<button class="btn btn-sm btn-primary col-md-4 m-2"> Save</button>
+								<button class="btn btn-sm btn-danger col-md-4 m-2" type="button" onclick="$('#manage-supplier').get(0).reset()"> Cancel</button>
+							<!-- </div> -->
+							
 						</div>
 					</div>
 				</div>

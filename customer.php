@@ -30,10 +30,10 @@
 							
 					<div class="card-footer">
 						<div class="row">
-							<div class="col-md-12">
-								<button class="btn btn-sm btn-primary col-sm-3 offset-md-3"> Save</button>
-								<button class="btn btn-sm btn-default col-sm-3" type="button" onclick="$('#manage-customer').get(0).reset()"> Cancel</button>
-							</div>
+							<!-- <div class="col-md-12"> -->
+								<button class="btn btn-sm btn-primary col-md-4 m-2"> Save</button>
+								<button class="btn btn-sm btn-danger col-md-4 m-2" type="button" onclick="$('#manage-customer').get(0).reset()"> Cancel</button>
+							<!-- </div> -->
 						</div>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 								<tr>
 									<td class="text-center"><?php echo $i++ ?></td>
 									<td class="">
-										<p>Name : <b><?php echo $row['name'] ?></b></p>
+										<p>Name : <b><?php echo ucwords($row['name'] )?></b></p>
 										<p><small>Contact : <b><?php echo $row['contact'] ?></b></small></p>
 										<p><small>Address : <b><?php echo $row['address'] ?></b></small></p>
 									</td>
