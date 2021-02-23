@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2020 at 07:42 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Host: localhost
+-- Generation Time: Feb 23, 2021 at 05:16 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pharmacy_db`
+-- Database: `pharmacy`
 --
 
 -- --------------------------------------------------------
@@ -64,7 +64,11 @@ CREATE TABLE `customer_list` (
 --
 
 INSERT INTO `customer_list` (`id`, `name`, `contact`, `address`) VALUES
-(1, 'Sample Customer', '+123456789', 'Sample address');
+(1, 'ojuade tosin', '153300', 'ogbomoso'),
+(2, 'Adebisi Racheal', '904089729', 'Ayekale Osogbo'),
+(3, 'Oluokun Kabiru', '09180947', 'Isalu Iseyin, Oyo state'),
+(4, 'Awoyemi Mystiquecode', '0947842', 'Osogbo'),
+(5, 'tosin ojuade omoloa', '2094829', 'Lautech Ogbomoso');
 
 -- --------------------------------------------------------
 
@@ -85,7 +89,10 @@ CREATE TABLE `expired_product` (
 --
 
 INSERT INTO `expired_product` (`id`, `product_id`, `qty`, `date_expired`, `date_created`) VALUES
-(3, 6, 5, '2020-10-05', '2020-10-09 08:20:08');
+(3, 6, 5, '2020-10-05', '2020-10-09 08:20:08'),
+(4, 3, 4, '2021-02-20', '2021-02-20 09:10:27'),
+(5, 5, 12, '2021-02-02', '2021-02-20 09:11:07'),
+(6, 3, 1, '2021-02-04', '2021-02-20 09:15:47');
 
 -- --------------------------------------------------------
 
@@ -118,13 +125,12 @@ INSERT INTO `inventory` (`id`, `product_id`, `qty`, `type`, `stock_from`, `form_
 (4, 5, 300, 1, 'receiving', 1, '2021-11-09', 0, '{\"price\":\"10\",\"qty\":\"300\"}', 'Stock from Receiving-83386962\r\n', '2020-10-08 10:55:21'),
 (5, 4, 500, 1, 'receiving', 2, '2022-10-14', 0, '{\"price\":\"8\",\"qty\":\"500\"}', 'Stock from Receiving-00000000\n', '2020-10-08 11:03:36'),
 (6, 6, 10, 1, 'receiving', 2, '2020-10-05', 1, '{\"price\":\"18\",\"qty\":\"10\"}', 'Stock from Receiving-00000000\n', '2020-10-09 08:20:00'),
-(8, 3, 1, 2, 'Sales', 2, '0000-00-00', 0, '{\"price\":\"10\",\"qty\":\"1\"}', 'Stock out from Sales-00000000\n', '2020-10-08 13:23:13'),
+(8, 3, 1, 2, 'Sales', 2, '0000-00-00', 1, '{\"price\":\"10\",\"qty\":\"1\"}', 'Stock out from Sales-00000000\n', '2021-02-20 09:15:33'),
 (9, 5, 20, 2, 'Sales', 2, '0000-00-00', 0, '{\"price\":\"15\",\"qty\":\"20\"}', 'Stock out from Sales-00000000\n', '2020-10-08 13:23:13'),
-(10, 3, 20, 2, 'Sales', 3, '0000-00-00', 0, '{\"price\":\"10\",\"qty\":\"20\"}', 'Stock out from Sales-74800422\n', '2020-10-08 13:42:29'),
-(11, 3, 10, 2, 'Sales', 4, '0000-00-00', 0, '{\"price\":\"10\",\"qty\":\"10\"}', 'Stock out from Sales-01966403\n', '2020-10-08 13:43:08'),
 (12, 8, 500, 1, 'receiving', 3, '2021-04-29', 0, '{\"price\":\"10\",\"qty\":\"500\"}', 'Stock from Receiving-95300488\n', '2020-10-09 08:17:29'),
 (13, 8, 10, 2, 'Sales', 5, '0000-00-00', 0, '{\"price\":\"15\",\"qty\":\"10\"}', 'Stock out from Sales-16232790\n', '2020-10-09 08:19:04'),
-(14, 3, 10, 2, 'Sales', 5, '0000-00-00', 0, '{\"price\":\"10\",\"qty\":\"10\"}', 'Stock out from Sales-16232790\n', '2020-10-09 08:19:04');
+(14, 3, 10, 2, 'Sales', 5, '0000-00-00', 1, '{\"price\":\"10\",\"qty\":\"10\"}', 'Stock out from Sales-16232790\n', '2021-02-19 16:47:28'),
+(15, 6, 500, 1, 'receiving', 4, '2021-02-21', 0, '{\"price\":\"80\",\"qty\":\"500\"}', 'Stock from Receiving-26163544\n', '2021-02-20 09:19:32');
 
 -- --------------------------------------------------------
 
@@ -178,7 +184,8 @@ CREATE TABLE `receiving_list` (
 INSERT INTO `receiving_list` (`id`, `ref_no`, `supplier_id`, `total_amount`, `date_added`) VALUES
 (1, '83386962\n', 1, 14000, '2020-10-08 10:52:05'),
 (2, '00000000\n', 3, 4180, '2020-10-08 11:03:36'),
-(3, '95300488\n', 3, 5000, '2020-10-09 08:17:29');
+(3, '95300488\n', 3, 5000, '2020-10-09 08:17:29'),
+(4, '26163544\n', 5, 40000, '2021-02-20 09:19:32');
 
 -- --------------------------------------------------------
 
@@ -193,18 +200,21 @@ CREATE TABLE `sales_list` (
   `total_amount` double NOT NULL,
   `amount_tendered` double NOT NULL,
   `amount_change` double NOT NULL,
-  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `userid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales_list`
 --
 
-INSERT INTO `sales_list` (`id`, `ref_no`, `customer_id`, `total_amount`, `amount_tendered`, `amount_change`, `date_updated`) VALUES
-(2, '00000000\n', 0, 310, 400, 90, '2020-10-08 13:23:13'),
-(3, '74800422\n', 0, 200, 200, 0, '2020-10-08 13:42:29'),
-(4, '01966403\n', 0, 100, 100, 0, '2020-10-08 13:43:08'),
-(5, '16232790\n', 1, 250, 300, 50, '2020-10-09 08:19:04');
+INSERT INTO `sales_list` (`id`, `ref_no`, `customer_id`, `total_amount`, `amount_tendered`, `amount_change`, `date_updated`, `userid`) VALUES
+(2, '00000000\n', 0, 310, 400, 90, '2020-10-08 13:23:13', NULL),
+(5, '16232790\n', 1, 250, 300, 50, '2020-10-09 08:19:04', NULL),
+(6, '65728852\n', 5, 280, 300, 20, '2021-02-20 09:22:50', NULL),
+(7, '42416958\n', 0, 75, 78, 3, '2021-02-19 17:09:31', NULL),
+(8, '66193372\n', 2, 359, 350, -9, '2021-02-20 09:24:08', NULL),
+(9, '53014014\n', 3, 120, 121, 1, '2021-02-20 09:24:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -224,9 +234,10 @@ CREATE TABLE `supplier_list` (
 --
 
 INSERT INTO `supplier_list` (`id`, `supplier_name`, `contact`, `address`) VALUES
-(1, 'Supplier 1', '65524556', 'Sample Address'),
-(3, 'Supplier 2', '6546531', 'Supplier2 Address'),
-(4, 'Supplier 3', '85655466', 'Sample supplier address');
+(1, 'ojuade tosin', '153300', 'Osogbo'),
+(3, 'kabiru adesina', '6546531', 'iseyin'),
+(4, 'Village boy', '85655466', 'Ogbomoso'),
+(5, 'tosin ojuade omoloa', '+153300', 'Lautech');
 
 -- --------------------------------------------------------
 
@@ -292,8 +303,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`) VALUES
-(1, 'Administrator', 'admin', 'admin123', 1),
-(4, 'John Smith', 'jsmith', 'jsmith123', 0);
+(1, 'oluokun kabiru', 'admin', 'admin123', 1),
+(4, 'tosin omolola ojuade', 'omolola', 'tosin', 1),
+(5, 'Village Boy', 'vboy', 'admin', 1),
+(6, 'Omolola Tosin', 'tosin', 'tosin', 1),
+(7, 'Babtech Abdulwasi', 'babtech', 'babtech', 2),
+(8, 'Adebayo Medinah', 'hummu', 'hummu', 2);
 
 --
 -- Indexes for dumped tables
@@ -379,19 +394,19 @@ ALTER TABLE `category_list`
 -- AUTO_INCREMENT for table `customer_list`
 --
 ALTER TABLE `customer_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `expired_product`
 --
 ALTER TABLE `expired_product`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product_list`
@@ -403,19 +418,19 @@ ALTER TABLE `product_list`
 -- AUTO_INCREMENT for table `receiving_list`
 --
 ALTER TABLE `receiving_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sales_list`
 --
 ALTER TABLE `sales_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `supplier_list`
 --
 ALTER TABLE `supplier_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -433,7 +448,7 @@ ALTER TABLE `type_list`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
